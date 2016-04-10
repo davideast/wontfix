@@ -1,3 +1,9 @@
 {
-  "routes": []
+  "routes": [
+    {
+      "routePath": "/login/...",
+      "component": "LoginRoot",
+      "componentPath": "./login/login-root.component"
+    }
+  ]
 }
