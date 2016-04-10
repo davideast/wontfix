@@ -4,6 +4,7 @@ import {WFRouteConfig} from './routes';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MdButton} from '@angular2-material/button';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
+import {AngularFire} from 'angularfire2';
 
 @Component({
   selector: 'wontfix-app',
@@ -20,12 +21,14 @@ import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 @RouteConfig([].concat(WFRouteConfig))
 export class WontfixApp {
  
-  constructor(private _router: Router) {
-    let authed = false;
-    if (!authed) {
-      this._router.navigate( ['Login'] );
-    }
-    //setInterval(() => console.log('still here in WontfixApp'), 500);
+  constructor(private _af: AngularFire, private _router: Router) {
+    this._af.auth.subscribe(auth => {
+      if (!auth) {
+        this._router.navigate( ['Login'] );
+      } else {
+        this._router.navigate( ['RepoList'] );
+      }
+    });
   }
   
 }
