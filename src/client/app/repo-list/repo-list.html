@@ -1,3 +1,6 @@
-<p>
-  repo-list Works!
-</p>
+<div *ngFor="#repo of repos | async">
+  <md-card class="app-md-card">
+    <h3>{{repo.name}}</h3>
+    <p>{{repo.open_issues}}</p>
+  </md-card>
+</div>

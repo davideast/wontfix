@@ -1,8 +1,13 @@
 import {Component} from 'angular2/core';
-import {Http, Response} from 'angular2/http';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
 import {RepoService} from './repo-service';
+import {Repo, Owner} from '../github-service';
+import {MdToolbar} from '@angular2-material/toolbar';
+import {MdButton} from '@angular2-material/button';
+import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
+import {AngularFire} from 'angularfire2';
+import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from 'angular2/router';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 @Component({
@@ -10,24 +15,18 @@ import 'rxjs/Rx';
   templateUrl: 'app/repo-list/repo-list.html',
   styleUrls: ['app/repo-list/repo-list.css'],
   providers: [RepoService, HTTP_PROVIDERS],
-  directives: [],
+  directives: [
+    ROUTER_DIRECTIVES,
+    MD_CARD_DIRECTIVES,
+    MdButton,
+    MdToolbar
+  ],
   pipes: []
 })
 export class RepoList {
-
+  repos: Observable<Repo[]>;
   constructor(public rs: RepoService) {
-    rs.getRepos().subscribe(repos => console.log(repos));
+    this.repos = rs.getRepos();
   }
-  
-  // getRepos() {
-  //   return this.http.get('')
-  //            .map(res => <any[]> res.json().data)
-  //            .catch(this.handleError);
-  // }
-
-  // private handleError (error: Response) {
-  //   console.error(error);
-  //   return Observable.throw(error.json().error || 'Server error');
-  // }  
-
+ 
 }

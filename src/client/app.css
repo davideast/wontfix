@@ -23,3 +23,7 @@ body, html {
 .app-content {
   padding: 20px;
 }
+
+.app-md-card {
+  margin: 20px 10px;
+}
